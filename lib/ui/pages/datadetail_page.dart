@@ -48,34 +48,34 @@ class _DetailDataState extends State<DetailData> {
                 Column(
                   children: [
                     SizedBox(height: 10),
-                    TextFormField(
-                      controller: ctrlName =
-                          TextEditingController(text: widget.product.name),
-                      decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.account_circle),
-                        labelText: 'Product Name',
-                        hintText: 'Write your product name',
-                        border: OutlineInputBorder(),
+                      TextFormField(
+                        controller: ctrlName =
+                            TextEditingController(text: widget.product.name),
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.account_circle),
+                          labelText: 'Product Name',
+                          hintText: 'Write your product name',
+                          border: OutlineInputBorder(),
+                        ),
                       ),
-                    ),
                     SizedBox(height: 20),
-                    TextFormField(
-                      controller: ctrlPrice =
-                          TextEditingController(text: widget.product.price),
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.attach_money),
-                        labelText: 'Price',
-                        hintText: "Write product's price",
-                        border: OutlineInputBorder(),
+                      TextFormField(
+                        controller: ctrlPrice =
+                            TextEditingController(text: widget.product.price),
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.attach_money),
+                          labelText: 'Price',
+                          hintText: "Write product's price",
+                          border: OutlineInputBorder(),
+                        ),
                       ),
-                    ),
                     SizedBox(height: 20),
-                    Container(
-                        child: Image.network(
-                      widget.product.image,
-                      scale: 4,
-                    )),
+                      Container(
+                          child: Image.network(
+                        widget.product.image,
+                        scale: 4,
+                      )),
                     SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -135,62 +135,63 @@ class _DetailDataState extends State<DetailData> {
                           },
                         ),
                         SizedBox(width: 20),
-                        RaisedButton(
-                          color: Colors.red,
-                          textColor: Colors.white,
-                          padding: EdgeInsets.all(15),
-                          child: Text("Delete Product"),
-                          onPressed: () {
-                            ctrlId =
-                                TextEditingController(text: widget.product.id);
-                            showDialog(
-                                context: context,
-                                builder: (BuildContext) {
-                                  return AlertDialog(
-                                    title: Text("Confirmation"),
-                                    content:
-                                        Text("Are you sure want to delete?"),
-                                    actions: [
-                                      FlatButton(
-                                        child: Text("Yes"),
-                                        onPressed: () async {
-                                          setState(() {
-                                            isLoading = true;
-                                          });
-                                          Products product =
-                                              Products(ctrlId.text, "", "", "");
-                                          bool result = await ProductService
-                                              .deleteProduct(product);
-                                          if (result == true) {
-                                            Fluttertoast.showToast(
-                                              msg: "Delete product succesful!",
-                                              toastLength: Toast.LENGTH_SHORT,
-                                              gravity: ToastGravity.BOTTOM,
-                                              backgroundColor: Colors.green,
-                                              textColor: Colors.white,
-                                              fontSize: 16.0,
-                                            );
+                          RaisedButton(
+                            color: Colors.red,
+                            textColor: Colors.white,
+                            padding: EdgeInsets.all(15),
+                            child: Text("Delete Product"),
+                            onPressed: () {
+                              ctrlId =
+                                  TextEditingController(text: widget.product.id);
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext) {
+                                    return AlertDialog(
+                                      title: Text("Confirmation"),
+                                      content:
+                                          Text("Are you sure want to delete?"),
+                                      actions: [
+                                        FlatButton(
+                                          child: Text("Yes"),
+                                          onPressed: () async {
                                             setState(() {
-                                              isLoading = false;
+                                              isLoading = true;
                                             });
+                                            Products product =
+                                                Products(ctrlId.text, "", "", "");
+                                            bool result = await ProductService
+                                                .deleteProduct(product);
+                                            if (result == true) {
+                                              Fluttertoast.showToast(
+                                                msg: "Delete product succesful!",
+                                                toastLength: Toast.LENGTH_SHORT,
+                                                gravity: ToastGravity.BOTTOM,
+                                                backgroundColor: Colors.green,
+                                                textColor: Colors.white,
+                                                fontSize: 16.0,
+                                              );
+                                              setState(() {
+                                                isLoading = false;
+                                              });
+                                              Navigator.pop(context);
+                                              Navigator.pop(context);
+                                            }
+                                          },
+                                        ),
+                                        FlatButton(
+                                          child: Text("no"),
+                                          onPressed: () async {
                                             Navigator.pop(context);
-                                            Navigator.pop(context);
-                                          }
-                                        },
-                                      ),
-                                      FlatButton(
-                                        child: Text("no"),
-                                        onPressed: () async {
-                                          Navigator.pop(context);
-                                        },
-                                      )
-                                    ],
-                                  );
-                                });
-                          },
-                        ),
-                      ],
-                    )
+                                          },
+                                        )
+                                      ],
+                                    );
+                                  }
+                                );
+                            },
+                          ),
+                        ],
+                      )
                   ],
                 )
               ],

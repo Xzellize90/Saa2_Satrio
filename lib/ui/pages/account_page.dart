@@ -49,14 +49,14 @@ class _AccountPageState extends State<AccountPage> {
                     Container(
                       child: Text(
                         "username",
-                        style: TextStyle(fontSize: 15),
+                        style: TextStyle(fontSize: 14),
                       ),
                     ),
                     SizedBox(height: 20),
                     Container(
                       child: Text(
-                        "username",
-                        style: TextStyle(fontSize: 15),
+                        "email",
+                        style: TextStyle(fontSize: 14),
                       ),
                     ),
                     SizedBox(height: 40),
@@ -70,7 +70,7 @@ class _AccountPageState extends State<AccountPage> {
                     BoxShadow(
                         color: Colors.grey.withOpacity(0.5),
                         spreadRadius: 1,
-                        offset: Offset(0, 3),
+                        offset: Offset(0, 2),
                         blurRadius: 7)
                   ],
                 ),
@@ -129,11 +129,12 @@ class _AccountPageState extends State<AccountPage> {
                                     onPressed: () {
                                       Navigator.pop(context);
                                     },
-                                    child: Text("No"))
+                                child: Text("No"))
                               ],
                             );
-                          });
-                    },
+                          }
+                        );
+                      },
                     padding: EdgeInsets.all(12),
                     textColor: Colors.white,
                     color: Colors.redAccent,
