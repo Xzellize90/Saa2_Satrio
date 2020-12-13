@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1097774195091",
+    "firebase_url": "https://flutterpractice-dceab.firebaseio.com",
+    "project_id": "flutterpractice-dceab",
+    "storage_bucket": "flutterpractice-dceab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1097774195091:android:b29c34ad68684b16860866",
+        "android_client_info": {
+          "package_name": "com.example.bloc_practice"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1097774195091-c0md16n1q0gsdt5lqcmkquu7u51p86jk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpLWcrPXyLWEgdkQ0eNwdLeBYLiJp1Qzo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1097774195091-c0md16n1q0gsdt5lqcmkquu7u51p86jk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
