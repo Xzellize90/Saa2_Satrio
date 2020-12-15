@@ -62,10 +62,10 @@ class _AccountPageState extends State<AccountPage> {
                   children: [
                     SizedBox(height: 40),
                     CircleAvatar(
-                          radius: 100,
+                          radius: 75,
                           backgroundImage: NetworkImage(
                             img ??
-                                "https://firebasestorage.googleapis.com/v0/b/startapp-ece15.appspot.com/o/assets%2Fdefault-user-image.png?alt=media&token=9807934a-cf98-4433-9c22-c013e6fc1859",
+                                "https://img.pngio.com/free-icon-download-users-human-figure-human-logo-transparent-human-icon-png-920_1060.png",
                           ),
                         ),
                     SizedBox(height: 20),
