@@ -7,9 +7,41 @@ class AccountPage extends StatefulWidget {
 
 class _AccountPageState extends State<AccountPage> {
 
+  User _auth = FirebaseAuth.instance.currentUser;
   CollectionReference userCollection =
       FirebaseFirestore.instance.collection("users");
   bool isLoading = false;
+  String img, name, email;
+
+  PickedFile imageFile;
+  final ImagePicker imagePicker = ImagePicker();
+
+  Future chooseImage() async {
+    final selectedImage = await imagePicker.getImage(
+      source: ImageSource.gallery, imageQuality: 50
+      );
+      setState(() {
+        imageFile = selectedImage;
+      });
+  }
+
+  void getUserUpdate() async{
+    userCollection.doc(_auth.uid).snapshots().listen( (event) {
+      img = event.data()['profilePicture'];
+      name = event.data()['name'];
+      email = event.data()['email'];
+      if(img == ""){
+        img = null;
+      }
+      setState(() {});
+    });
+  }
+
+  void initState(){
+    getUserUpdate();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,28 +51,52 @@ class _AccountPageState extends State<AccountPage> {
         leading: Container(),
       ),
       body: Container(
-        padding: EdgeInsets.all(20),
+        padding: EdgeInsets.all(10),
         child: Column(
           children: [
             Flexible(
               flex: 9,
               child: Container(
+                width: double.infinity,
                 child: Column(
                   children: [
                     SizedBox(height: 40),
-                    Container(
-                      width: 110,
-                      height: 110,
-                      decoration: BoxDecoration(
-                          color: Colors.blue,
-                          borderRadius: BorderRadius.circular(60)),
-                    ),
+                    CircleAvatar(
+                          radius: 100,
+                          backgroundImage: NetworkImage(
+                            img ??
+                                "https://firebasestorage.googleapis.com/v0/b/startapp-ece15.appspot.com/o/assets%2Fdefault-user-image.png?alt=media&token=9807934a-cf98-4433-9c22-c013e6fc1859",
+                          ),
+                        ),
                     SizedBox(height: 20),
                     Container(
                       child: RaisedButton.icon(
                         icon: Icon(Icons.photo_camera),
                         label: Text("Edit Photo"),
-                        onPressed: () {},
+                        onPressed: () async{
+                          await chooseImage();
+                          await UserServices.updateProfilePicture(_auth.uid, imageFile).then((value) {
+                            if(value){
+                            Fluttertoast.showToast(
+                              msg: "Update Profile Succesfull!",
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.BOTTOM,
+                              backgroundColor: Colors.green,
+                              textColor: Colors.white,
+                              fontSize: 16.0,
+                            );
+                          }else{
+                            Fluttertoast.showToast(
+                              msg: "Failed",
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.BOTTOM,
+                              backgroundColor: Colors.green,
+                              textColor: Colors.white,
+                              fontSize: 16.0,
+                            );
+                          }
+                          });
+                        },
                         textColor: Colors.white,
                         color: Colors.blueAccent,
                       ),
@@ -48,14 +104,14 @@ class _AccountPageState extends State<AccountPage> {
                     SizedBox(height: 40),
                     Container(
                       child: Text(
-                        "username",
+                        name ?? '',
                         style: TextStyle(fontSize: 14),
                       ),
                     ),
                     SizedBox(height: 20),
                     Container(
                       child: Text(
-                        "email",
+                        email ?? '',
                         style: TextStyle(fontSize: 14),
                       ),
                     ),
@@ -141,7 +197,7 @@ class _AccountPageState extends State<AccountPage> {
                     child: Text("Sign Out"),
                   ),
                 ),
-              ),
+              )
             ),
             isLoading == true
                 ? Container(

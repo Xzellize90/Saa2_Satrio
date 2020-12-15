@@ -1,4 +1,5 @@
 
+import 'dart:ffi';
 import 'dart:io';
 
 import 'package:bloc_practice/main.dart';
@@ -7,6 +8,7 @@ import 'package:bloc_practice/services/product_services.dart';
 import 'package:bloc_practice/services/services.dart';
 import 'package:bloc_practice/ui/widgets/productcard.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
